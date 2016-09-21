@@ -1,0 +1,7 @@
+---
+applications:
+- name: discovery-a 
+  memory: 256M
+  path: target/discovery-a-1.0-SNAPSHOT.jar
+  services:
+  - eureka-server 
