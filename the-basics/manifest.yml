@@ -1,7 +1,5 @@
 ---
 applications:
 - name: the-basics
-  memory: 512M
+  memory: 256M
   path: target/the-basics-1.0-SNAPSHOT.jar
-  services:
-  - mysql-dev
