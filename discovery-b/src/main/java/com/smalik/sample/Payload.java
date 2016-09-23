@@ -1,4 +1,4 @@
-package com.smalik.hellothere;
+package com.smalik.sample;
 
 public class Payload {
 	

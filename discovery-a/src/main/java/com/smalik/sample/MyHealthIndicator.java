@@ -1,4 +1,4 @@
-package com.smalik.hellothere;
+package com.smalik.sample;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

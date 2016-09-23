@@ -1,4 +1,4 @@
-package com.smalik.hellothere;
+package com.smalik.sample;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
