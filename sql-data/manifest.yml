@@ -1,0 +1,7 @@
+---
+applications:
+- name: sql-data 
+  memory: 512M
+  path: target/sql-data-1.0-SNAPSHOT.jar
+  services:
+  - mysql-dev
