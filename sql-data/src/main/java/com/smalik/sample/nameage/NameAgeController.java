@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class NameAgeController {
 
-	/* submit with request params */
+	/* Submit bean as request params with a GET operation */
 	/* example:
 	 *    curl -X GET "http://localhost:8080/age/params?name=salman&age=40" --silent | jq .
 	 */
@@ -23,7 +23,7 @@ public class NameAgeController {
 		return bean;
 	}
 	
-	/* same thing as the params example but you get error codes that make more sense */
+	/* Same thing as the params example but you get validation error codes that make more sense */
 	/* example:
 	 *    curl -X GET "http://localhost:8080/age/model?name=salman&age=40" --silent | jq .
 	 */
@@ -34,7 +34,7 @@ public class NameAgeController {
 		return bean;
 	}
 	
-	/* submit with JSON body and set header of "Content-Type: application/json" */
+	/* Submit bean as JSON body with a GET operation */
 	/* example:
 	 *    curl -X GET -H "Content-Type: application/json" "http://localhost:8080/age/body" -d '{"name":"Salman", "age":40}' --silent | jq .
 	 */
