@@ -1,5 +1,5 @@
 ---
 applications:
 - name: the-basics
-  memory: 256M
+  memory: 768M
   path: target/the-basics-1.0-SNAPSHOT.jar

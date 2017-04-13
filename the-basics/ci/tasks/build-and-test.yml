@@ -1,0 +1,12 @@
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: maven
+    tag: '3-jdk-8'
+run:
+  path: the-basics-repo/the-basics/ci/tasks/build-and-test.sh
+inputs:
+  - name: the-basics-repo
+outputs:
+  - name: the-basics-output

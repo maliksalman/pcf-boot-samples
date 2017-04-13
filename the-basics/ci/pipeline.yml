@@ -1,0 +1,26 @@
+resources:
+  - name: the-basics-repo
+    type: git
+    source:
+      uri: https://github.com/maliksalman/pcf-boot-samples.git
+      branch: concourse
+  - name: pcfdev
+    type: cf
+    source:
+      api: https://api.local2.pcfdev.io
+      username: admin
+      password: admin
+      organization: pcfdev-org
+      space: pcfdev-space
+      skip_cert_check: true    
+
+jobs:
+  - name: build-and-test
+    plan:
+      - get: the-basics-repo
+        trigger: true
+      - task: build
+        file: the-basics-repo/the-basics/ci/tasks/build-and-test.yml
+      - put: pcfdev
+        params:
+          manifest: the-basics-output/manifest.yml
