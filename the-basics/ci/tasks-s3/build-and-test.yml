@@ -5,9 +5,10 @@ image_resource:
     repository: maven
     tag: 3-jdk-8
 run:
-  path: the-basics-repo/the-basics/ci/tasks/build-and-test.sh
+  path: the-basics-repo/the-basics/ci/tasks-s3/build-and-test.sh
 inputs:
 - name: the-basics-repo
+- name: version
 outputs:
 - name: the-basics-output
 params:

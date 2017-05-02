@@ -1,0 +1,13 @@
+---
+LOCAL_MVNREPO_HOST: 10.10.10.2
+
+CF_API_URL: https://api.local.pcfdev.io
+CF_ORG: pcfdev-org
+CF_SPACE: pcfdev-space
+CF_USER: admin
+CF_PASSWORD: admin
+
+S3_BUCKET: the-basics
+S3_ENDPOINT: http://10.10.10.2:9001
+S3_ACCESS_KEY: minio
+S3_SECRET_KEY: changeme 

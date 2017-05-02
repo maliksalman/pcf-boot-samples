@@ -17,16 +17,12 @@ public class MyController {
     private String bigSecret;
 
     @Autowired
-    private SpecialService specialService;
-
-    @Autowired
     private MessageService messageService;
 
-    @RequestMapping(value = "/myinfo", method = RequestMethod.GET)
+    @RequestMapping(value="/myinfo", method=RequestMethod.GET)
     @ResponseBody public Map<String, String> getMessage() {
     	HashMap<String, String> map = new HashMap<>();
     	map.put("message", messageService.getMessage());
-    	map.put("special",  specialService.getValue());
     	map.put("secret", bigSecret);
         return map;
     }

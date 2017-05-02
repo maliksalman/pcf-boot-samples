@@ -1,0 +1,86 @@
+resources:
+
+- name: the-basics-repo
+  type: git
+  source:
+    uri: https://github.com/maliksalman/pcf-boot-samples.git
+    branch: concourse
+
+- name: version
+  type: semver
+  source:
+    driver: s3
+    bucket: {{S3_BUCKET}}
+    key: current-version
+    disable_ssl: true
+    endpoint: {{S3_ENDPOINT}}
+    access_key_id: {{S3_ACCESS_KEY}}
+    secret_access_key: {{S3_SECRET_KEY}}
+    initial_version: 1.0.0
+
+- name: jar-artifacts
+  type: s3
+  source:
+    bucket: {{S3_BUCKET}}
+    regexp: the-basics-(.*).jar
+    disable_ssl: true
+    endpoint: {{S3_ENDPOINT}}
+    access_key_id: {{S3_ACCESS_KEY}}
+    secret_access_key: {{S3_SECRET_KEY}}
+
+- name: manifest-artifacts
+  type: s3
+  source:
+    bucket: {{S3_BUCKET}}
+    regexp: manifest-(.*).yml
+    disable_ssl: true
+    endpoint: {{S3_ENDPOINT}}
+    access_key_id: {{S3_ACCESS_KEY}}
+    secret_access_key: {{S3_SECRET_KEY}}
+
+- name: pcfdev
+  type: cf
+  source:
+    api: {{CF_API_URL}}
+    username: {{CF_USER}}
+    password:  {{CF_PASSWORD}}
+    organization:  {{CF_ORG}}
+    space:  {{CF_SPACE}}
+    skip_cert_check: true
+
+jobs:
+
+- name: build-and-test
+  plan:
+  - get: the-basics-repo
+    trigger: true
+  - put: version
+    params:
+      bump: patch
+  - task: build
+    file: the-basics-repo/the-basics/ci/tasks-s3/build-and-test.yml
+    params:
+      local_mvnrepo_host: {{LOCAL_MVNREPO_HOST}}
+  - put: jar-artifacts
+    params:
+      file: the-basics-output/the-basics-*.jar
+  - put: manifest-artifacts
+    params:
+      file: the-basics-output/manifest-*.yml
+
+- name: deploy-to-pcf
+  plan:
+  - aggregate:
+    - get: jar-artifacts
+      trigger: true
+      passed: [build-and-test]
+    - get: manifest-artifacts
+      trigger: true
+      passed: [build-and-test]
+  - get: the-basics-repo
+  - task: copy-artifacts
+    file: the-basics-repo/the-basics/ci/tasks-s3/copy-artifacts.yml
+  - put: pcfdev
+    params:
+      manifest: deploy-artifacts/manifest.yml
+      path: deploy-artifacts/the-basics.jar
