@@ -1,0 +1,10 @@
+---
+security:
+  basic:
+    enabled: false
+eureka:
+  instance:
+    appname: discovery-blue-green
+    initialStatus: STARTING
+    metadataMap:
+      foo: bar
