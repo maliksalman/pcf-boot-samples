@@ -1,7 +1,0 @@
----
-applications:
-- name: amqp-sink
-  path: build/libs/amqp-sink-0.0.1-SNAPSHOT.jar
-  memory: 512M
-  services:
-  - grapevine-service

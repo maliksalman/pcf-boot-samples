@@ -1,13 +1,5 @@
 # CloudFoundry/SpringBoot sample applications
 
-## amqp-source
-
-This sample spring-boot application produces 'grape' messages into RabbitMQ topic(s) using spring-cloud-streams abstraction. It demonstrates how to setup serialization for date/time objects to JSON - which is the format it produces the 'grape' messages in. Also demenstrates producing multiple types of message on a single topic. Use the `amqp-sink` app to consume the 'grape' messages.      
-
-## amqp-sink
-
-This sample spring-boot application consumes 'grape' messages from RabbitMQ topic(s) using the spring-cloud-streams abstraction. It shows how to properly consume messages using either the `MessageHandler` or `@StreamListener` mechanisms exposed by spring-cloud-streams. It also demonstrates how to setup deserialization for date/time objects from JSON - which is the format it expects the 'grape' messages on the topics to be in. In addition, it also shows how to use headers to consumer multiple type of events from a single topic. Use the `amqp-source` to generate different kind of 'grape' messages.      
-
 ## discovery-a
 
 Sample spring-boot application that registers with eureka-server with its registration status depending on a healthcheck. Also, shows example of making a call to the `discovery-b` app by first locating it through the eureka-server.
