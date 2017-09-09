@@ -1,20 +1,16 @@
-package com.smalik.sample.nameage;
-
-import javax.validation.Valid;
+package com.smalik.sample.person;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
-public class CrudController {
+public class PersonController {
 
 	@Autowired
-	private NameAgeRepository repo;
+	private PersonRepository repo;
 	
 	/**
 	 * Creates a new person, example:
@@ -25,7 +21,7 @@ public class CrudController {
 	 */
 	@RequestMapping(value="/person", method=RequestMethod.POST)
 	@ResponseBody
-	public NameAgeBean create(@RequestBody @Valid NameAgeBean bean) {
+	public Person create(@RequestBody @Valid Person bean) {
 		return repo.save(bean);
 	}
 	
@@ -37,7 +33,7 @@ public class CrudController {
 	 */
 	@RequestMapping(value="/person", method=RequestMethod.GET)
 	@ResponseBody
-	public Iterable<NameAgeBean> all() {
+	public Iterable<Person> all() {
 		return repo.findAll();
 	}
 	
@@ -49,7 +45,7 @@ public class CrudController {
 	 */
 	@RequestMapping(value="/person/lt/{age}", method=RequestMethod.GET)
 	@ResponseBody
-	public Iterable<NameAgeBean> lessThan(@PathVariable int age) {
+	public Iterable<Person> lessThan(@PathVariable int age) {
 		return repo.findByAgeLessThan(age);
 	}
 
@@ -61,19 +57,19 @@ public class CrudController {
 	 */
 	@RequestMapping(value="/person/gt/{age}", method=RequestMethod.GET)
 	@ResponseBody
-	public Iterable<NameAgeBean> greaterThan(@PathVariable int age) {
+	public Iterable<Person> greaterThan(@PathVariable int age) {
 		return repo.findByAgeGreaterThan(age);
 	}
 
 	/**
 	 * Gets a list of all people in the system with the given name, example:
 	 * <code>
-	 * curl -X GET "http://localhost:8080/person/ClarkKent" --silent | jq .
+		 * curl -X GET "http://localhost:8080/person/ClarkKent" --silent | jq .
 	 * </code>
 	 */
 	@RequestMapping(value="/person/{name}", method=RequestMethod.GET)
 	@ResponseBody
-	public Iterable<NameAgeBean> name(@PathVariable String name) {
+	public Iterable<Person> name(@PathVariable String name) {
 		return repo.findByName(name);
 	}
 }

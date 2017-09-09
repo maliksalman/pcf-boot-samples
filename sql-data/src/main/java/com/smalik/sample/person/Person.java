@@ -1,4 +1,4 @@
-package com.smalik.sample.nameage;
+package com.smalik.sample.person;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="person")
-public class NameAgeBean {
+public class Person {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
