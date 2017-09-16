@@ -23,13 +23,12 @@ With these instruction you can setup a MySQL cluster with one master node and on
 1. Start the docker container:
 ```
 docker run --rm -d --name mysqlha -p 28012:28012 -p 28013:28013 -v /tmp/mysqlha:/opt/mysql datacharmer/mysql-sb-base sleep infinity
-
 ```
-1. Shell into container
+3. Shell into container
 ```
 docker exec -it mysqlha bash
 ```
-1. Once inside the container, create the MySQL cluster:
+4. Once inside the container, create the MySQL cluster:
 ```
 make_replication_sandbox --remote_access='%' --how_many_slaves=1 /opt/mysql/mysql-5.5.57-linux-glibc2.12-x86_64.tar.gz
 ```
@@ -41,7 +40,7 @@ To start/stop the master node, run the following (inside the container):
 sandboxes/rsandbox_mysql-5_5_57/master/start
 sandboxes/rsandbox_mysql-5_5_57/master/stop
 ```
-1. To start/stop the slave node, run the following (inside the container):
+To start/stop the slave node, run the following (inside the container):
 ```
 sandboxes/rsandbox_mysql-5_5_57/node1/start
 sandboxes/rsandbox_mysql-5_5_57/node1/stop
