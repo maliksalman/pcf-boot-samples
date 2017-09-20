@@ -57,7 +57,7 @@ To add a couple of people:
 curl -X POST -H "Content-Type: application/json" "http://localhost:8080/person" -d '{"name":"BruceWayne", "age":35}' --silent | jq .
 curl -X POST -H "Content-Type: application/json" "http://localhost:8080/person" -d '{"name":"ClarkKent", "age":25}' --silent | jq .
 ```
-To get the list of users:
+To get the list of people:
 ```
 curl -X GET "http://localhost:8080/person" --silent | jq .
 ```
