@@ -46,12 +46,23 @@ sandboxes/rsandbox_mysql-5_5_57/node1/start
 sandboxes/rsandbox_mysql-5_5_57/node1/stop
 ```
 
-## Starting the app
-Run the app with the `mysqlh` profile to connect with this MySQL cluster:
+## Testing with Sample app
+This sample app can be used to add "person" records to the DB via REST endpoint. Also, there is a REST endpoint to list all the person records in the DB. See the [application-mysqlha.properties](src/main/resources/application-mysqlha.properties) for how to configure the MySQL driver to connect to MySQL cluster running in docker. Run the app with the `mysqlh` profile to accomplish this:
+
 ```
 SPRING_PROFILES_ACTIVE=mysqlha mvn spring-boot:run
 ```
-
+To add a couple of people:
+```
+curl -X POST -H "Content-Type: application/json" "http://localhost:8080/person" -d '{"name":"BruceWayne", "age":35}' --silent | jq .
+curl -X POST -H "Content-Type: application/json" "http://localhost:8080/person" -d '{"name":"ClarkKent", "age":25}' --silent | jq .
+```
+To get the list of users:
+```
+curl -X GET "http://localhost:8080/person" --silent | jq .
+```
+One can bring the master node up/down in the docker container while testing with the above `curl` commands. The command to get list of people should always succeed even when the master node is down. Adding a person will only work when the master node is up since the salve node is running in readonly mode.
+ 
 ## Cleanup
 
 To cleanup and remove the MySQL cluster, simply stop the container:
