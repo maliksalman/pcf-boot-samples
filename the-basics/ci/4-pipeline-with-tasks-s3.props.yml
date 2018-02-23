@@ -1,6 +1,4 @@
 ---
-LOCAL_MVNREPO_HOST: 10.10.10.2
-
 CF_API_URL: https://api.local.pcfdev.io
 CF_ORG: pcfdev-org
 CF_SPACE: pcfdev-space

@@ -10,42 +10,42 @@ resources:
   type: semver
   source:
     driver: s3
-    bucket: {{S3_BUCKET}}
+    bucket: ((S3_BUCKET))
     key: current-version
     disable_ssl: true
-    endpoint: {{S3_ENDPOINT}}
-    access_key_id: {{S3_ACCESS_KEY}}
-    secret_access_key: {{S3_SECRET_KEY}}
+    endpoint: ((S3_ENDPOINT))
+    access_key_id: ((S3_ACCESS_KEY))
+    secret_access_key: ((S3_SECRET_KEY))
     initial_version: 1.0.0
 
 - name: jar-artifacts
   type: s3
   source:
-    bucket: {{S3_BUCKET}}
+    bucket: ((S3_BUCKET))
     regexp: the-basics-(.*).jar
     disable_ssl: true
-    endpoint: {{S3_ENDPOINT}}
-    access_key_id: {{S3_ACCESS_KEY}}
-    secret_access_key: {{S3_SECRET_KEY}}
+    endpoint: ((S3_ENDPOINT))
+    access_key_id: ((S3_ACCESS_KEY))
+    secret_access_key: ((S3_SECRET_KEY))
 
 - name: manifest-artifacts
   type: s3
   source:
-    bucket: {{S3_BUCKET}}
+    bucket: ((S3_BUCKET))
     regexp: manifest-(.*).yml
     disable_ssl: true
-    endpoint: {{S3_ENDPOINT}}
-    access_key_id: {{S3_ACCESS_KEY}}
-    secret_access_key: {{S3_SECRET_KEY}}
+    endpoint: ((S3_ENDPOINT))
+    access_key_id: ((S3_ACCESS_KEY))
+    secret_access_key: ((S3_SECRET_KEY))
 
 - name: pcfdev
   type: cf
   source:
-    api: {{CF_API_URL}}
-    username: {{CF_USER}}
-    password:  {{CF_PASSWORD}}
-    organization:  {{CF_ORG}}
-    space:  {{CF_SPACE}}
+    api: ((CF_API_URL))
+    username: ((CF_USER))
+    password:  ((CF_PASSWORD))
+    organization:  ((CF_ORG))
+    space:  ((CF_SPACE))
     skip_cert_check: true
 
 jobs:
@@ -60,7 +60,7 @@ jobs:
   - task: build
     file: the-basics-repo/the-basics/ci/tasks-s3/build-and-test.yml
     params:
-      local_mvnrepo_host: {{LOCAL_MVNREPO_HOST}}
+      local_mvnrepo_host: ((LOCAL_MVNREPO_HOST))
   - put: jar-artifacts
     params:
       file: the-basics-output/the-basics-*.jar
@@ -76,7 +76,7 @@ jobs:
       passed: [build-and-test]
     - get: manifest-artifacts
       trigger: true
-      passed: [build-and-test]
+      passed: [build-and-test]     
   - get: the-basics-repo
   - task: copy-artifacts
     file: the-basics-repo/the-basics/ci/tasks-s3/copy-artifacts.yml
