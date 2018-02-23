@@ -1,0 +1,34 @@
+resources:
+
+- name: the-basics-repo
+  type: git
+  source:
+    uri: https://github.com/maliksalman/pcf-boot-samples.git
+    branch: concourse
+
+jobs:
+
+- name: build
+  plan:
+
+  - get: the-basics-repo
+    trigger: true
+
+  - task: mvn-build
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: maven
+          tag: 3-jdk-8
+      inputs:
+      - name: the-basics-repo
+      outputs:
+      - name: the-basics-output
+      run:
+        path: mvn
+        args:
+        - -f
+        - the-basics-repo/the-basics/pom.xml
+        - package

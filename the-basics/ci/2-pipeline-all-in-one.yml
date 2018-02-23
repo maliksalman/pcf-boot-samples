@@ -9,19 +9,21 @@ resources:
 - name: pcfdev
   type: cf
   source:
-    api: ((pcf_api))
-    username: ((pcf_user))
-    password: ((pcf_password))
-    organization: ((pcf_org))
-    space: ((pcf_space))
+    api: ((CF_API_URL))
+    username: ((CF_USER))
+    password: ((CF_PASSWORD))
+    organization: ((CF_ORG))
+    space: ((CF_SPACE))
     skip_cert_check: true
 
 jobs:
 
 - name: build-and-deploy
   plan:
+
   - get: the-basics-repo
     trigger: true
+
   - task: build
     config:
       platform: linux
@@ -39,11 +41,11 @@ jobs:
         args:
         - -exc
         - |
-          cd the-basics-repo/the-basics
-          mvn package
-          mkdir ../../the-basics-output/target
-          cp target/*.jar ../../the-basics-output/target/
-          cp manifest.yml ../../the-basics-output/
+          mvn -f the-basics-repo/the-basics/pom.xml package
+          mkdir -p the-basics-output/target
+          cp the-basics-repo/the-basics/target/*.jar the-basics-output/target/
+          cp the-basics-repo/the-basics/manifest.yml the-basics-output/
+
   - put: pcfdev
     params:
       manifest: the-basics-output/manifest.yml

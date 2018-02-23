@@ -9,21 +9,24 @@ resources:
 - name: pcfdev
   type: cf
   source:
-    api: https://api.local.pcfdev.io
-    username: admin
-    password: admin
-    organization: pcfdev-org
-    space: pcfdev-space
+    api: ((CF_API_URL))
+    username: ((CF_USER))
+    password: ((CF_PASSWORD))
+    organization: ((CF_ORG))
+    space: ((CF_SPACE))
     skip_cert_check: true
 
 jobs:
 
-- name: build-and-test
+- name: build-and-deploy
   plan:
+
   - get: the-basics-repo
     trigger: true
+
   - task: build
     file: the-basics-repo/the-basics/ci/tasks/build-and-test.yml
+
   - put: pcfdev
     params:
       manifest: the-basics-output/manifest.yml
