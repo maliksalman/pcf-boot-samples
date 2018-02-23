@@ -1,0 +1,5 @@
+pcf_api: https://api.local.pcfdev.io
+pcf_user: admin
+pcf_password: admin
+pcf_org: pcfdev-org
+pcf_space: pcfdev-space

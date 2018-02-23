@@ -1,0 +1,49 @@
+resources:
+
+- name: the-basics-repo
+  type: git
+  source:
+    uri: https://github.com/maliksalman/pcf-boot-samples.git
+    branch: concourse
+
+- name: pcfdev
+  type: cf
+  source:
+    api: ((pcf_api))
+    username: ((pcf_user))
+    password: ((pcf_password))
+    organization: ((pcf_org))
+    space: ((pcf_space))
+    skip_cert_check: true
+
+jobs:
+
+- name: build-and-deploy
+  plan:
+  - get: the-basics-repo
+    trigger: true
+  - task: build
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: maven
+          tag: 3-jdk-8
+      inputs:
+      - name: the-basics-repo
+      outputs:
+      - name: the-basics-output
+      run:
+        path: sh
+        args:
+        - -exc
+        - |
+          cd the-basics-repo/the-basics
+          mvn package
+          mkdir ../../the-basics-output/target
+          cp target/*.jar ../../the-basics-output/target/
+          cp manifest.yml ../../the-basics-output/
+  - put: pcfdev
+    params:
+      manifest: the-basics-output/manifest.yml
