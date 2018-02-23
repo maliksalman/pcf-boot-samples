@@ -59,8 +59,6 @@ jobs:
       bump: patch
   - task: build
     file: the-basics-repo/the-basics/ci/tasks-s3/build-and-test.yml
-    params:
-      local_mvnrepo_host: ((LOCAL_MVNREPO_HOST))
   - put: jar-artifacts
     params:
       file: the-basics-output/the-basics-*.jar
