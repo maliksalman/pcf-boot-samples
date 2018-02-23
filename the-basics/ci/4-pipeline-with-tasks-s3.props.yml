@@ -1,5 +1,5 @@
 ---
-LOCAL_MVNREPO_HOST:
+LOCAL_MVNREPO_HOST: ""
 
 CF_API_URL: https://api.local.pcfdev.io
 CF_ORG: pcfdev-org
