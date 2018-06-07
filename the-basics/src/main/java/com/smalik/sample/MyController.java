@@ -30,10 +30,6 @@ public class MyController {
     @RequestMapping(value="/myinfo", method=RequestMethod.GET)
     @ResponseBody public Map<String, String> getMessage() throws InterruptedException {
 
-    	HashMap<String, String> map = new HashMap<>();
-    	map.put("message", messageService.getMessage());
-    	map.put("secret", bigSecret);
-
     	// add some artificial delay
     	if (delayConfiguration.isDelayEnabled()) {
 
@@ -47,6 +43,10 @@ public class MyController {
     	    LOGGER.info("Getting info");
         }
 
+        // actually do the work
+        HashMap<String, String> map = new HashMap<>();
+        map.put("message", messageService.getMessage());
+        map.put("secret", bigSecret);
         return map;
     }
 }
