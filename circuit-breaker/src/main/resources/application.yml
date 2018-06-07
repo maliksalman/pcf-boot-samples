@@ -1,0 +1,12 @@
+server:
+  port: 8181
+
+the-basics:
+  url: http://localhost:8080
+
+# ALL possible configuration properties for hystrix commands are at:
+# https://github.com/Netflix/Hystrix/wiki/Configuration#intro
+hystrix:
+  command:
+    getTheBasicsInfo: # this can also be "default" to apply to all commands
+      execution.isolation.thread.timeoutInMilliseconds: 250

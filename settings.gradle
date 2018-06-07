@@ -1,0 +1,12 @@
+rootProject.name = 'boot-samples'
+
+/**
+include 'discovery-a'
+include 'discovery-b'
+include 'discovery-bg'
+**/
+
+include 'simple-router'
+include 'sql-data'
+include 'the-basics'
+include 'circuit-breaker'
