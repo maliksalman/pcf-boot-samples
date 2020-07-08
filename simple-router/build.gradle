@@ -1,6 +1,6 @@
 buildscript {
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE")
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
 	}
 }
 
@@ -12,11 +12,13 @@ version = '0.0.1-SNAPSHOT'
 dependencies {
 	compile('org.springframework.cloud:spring-cloud-starter-netflix-zuul')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('io.micrometer:micrometer-registry-prometheus')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 dependencyManagement {
 	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Finchley.RC2"
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Finchley.SR4"
 	}
 }

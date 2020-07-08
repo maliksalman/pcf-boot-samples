@@ -1,0 +1,34 @@
+ribbon:
+  eureka:
+    enabled: false
+  ConnectTimeout: 50
+  ReadTimeout: 150
+
+zuul:
+  routes:
+    timeout:
+      path: /timeout/**
+      stripPrefix: true
+      serviceId: timeout
+    notimeout:
+      path: /notimeout/**
+      stripPrefix: true
+      serviceId: notimeout
+    test-proxy:
+      path: /test/*/something
+      serviceId: test-proxy
+      stripPrefix: false
+
+timeout:
+  ribbon:
+    listOfServers: http://localhost:8080
+    ConnectTimeout: 500
+    ReadTimeout: 5000
+
+notimeout:
+  ribbon:
+    listOfServers: http://localhost:8080
+
+text-proxy:
+  ribbon:
+    listOfServers: http://localhost:8080

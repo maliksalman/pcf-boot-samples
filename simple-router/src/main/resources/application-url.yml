@@ -1,0 +1,13 @@
+zuul:
+  routes:
+    timeout:
+      path: /timeout/**
+      url: http://localhost:8080/
+      stripPrefix: true
+    test-proxy:
+      path: /test/*/something
+      url: http://localhost:8080/
+      stripPrefix: false
+  host:
+    connect-timeout-millis: 500
+    socket-timeout-millis: 30000

@@ -1,17 +1,15 @@
 server:
   port: 9090
-  
-ribbon:
-  eureka:
-    enabled: false
 
-zuul:
-  routes:
-      
-    the-basics:
-      path: /the-basics/**
-      
-    test-proxy:
-      path: /test/*/something
-      url: http://localhost:8080/
-      stripPrefix: false
+management:
+  endpoints:
+    metrics:
+      enabled: true
+    web:
+      exposure:
+        include: info,health,metrics,prometheus
+
+  metrics:
+    export:
+      prometheus:
+        enabled: true
