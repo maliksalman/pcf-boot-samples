@@ -14,7 +14,7 @@ Sample spring-boot application that registers with eureka-server in the `STARTIN
 
 ## simple-router
 
-Sample spring-boot app that includes the netflix-zuul server and configuration in `application.yml` to route traffic another app.
+Sample spring-boot app that includes the netflix-zuul server and configuration in `application.yml` to route traffic to another app. There are couple of ways of configuring zuul, which can be invoked using different spring profiles, `url` and `ribbon`. For sending the metrics to a prometheus-rproxy, the `rproxy` profile can also be used.
 
 ## sql-data
 
