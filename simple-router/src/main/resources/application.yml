@@ -13,3 +13,5 @@ management:
     export:
       prometheus:
         enabled: true
+        rsocket:
+          enabled: false

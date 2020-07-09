@@ -22,8 +22,8 @@ zuul:
 timeout:
   ribbon:
     listOfServers: http://localhost:8080
-    ConnectTimeout: 500
-    ReadTimeout: 5000
+    ConnectTimeout: 50
+    ReadTimeout: 1500
 
 notimeout:
   ribbon:
@@ -32,3 +32,7 @@ notimeout:
 text-proxy:
   ribbon:
     listOfServers: http://localhost:8080
+
+logging:
+  level:
+    org.springframework.cloud.netflix.zuul.filters.post.SendErrorFilter: ERROR

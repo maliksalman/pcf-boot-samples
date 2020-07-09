@@ -1,0 +1,12 @@
+management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+        rsocket:
+          enabled: true
+          host: localhost
+          port: 7001
+          max-retries: 1000
+          first-backoff: 10s
+          max-backoff: 5m
