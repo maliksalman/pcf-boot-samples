@@ -1,6 +1,6 @@
 buildscript {
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE")
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.8.RELEASE")
 	}
 }
 
@@ -17,6 +17,6 @@ dependencies {
 
 dependencyManagement {
 	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Finchley.RC2"
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR6"
 	}
 }
